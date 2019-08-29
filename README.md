@@ -1,2 +1,2 @@
 # ifpage
-python console tools for fetching files by links from webpages
+python console tool for fetching files by links from webpages
