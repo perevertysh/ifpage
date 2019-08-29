@@ -32,7 +32,6 @@ def fetch_imgs(dir_name="", ext="", url="", pattern=""):
         filename = "{}{}img{}.{}".format(path, "/" + dir_name + "/" if dir_name else "", counter, ext)
         os.system("touch {}".format(filename))
         with open(filename, 'wb') as file:
-            # wordpress re.findall(r'\"(.*)\"', link)[0]
             file.write(requests.request(url=link, method='GET').content)
         counter += 1
 
