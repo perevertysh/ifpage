@@ -16,7 +16,7 @@ def set_parser():
     return parser.parse_args()
 
 
-def fetch_imgs(dir_name="", ext="", url="", pattern=""):
+def fetch_imgs(dir_name="", dir_path="", ext="", url="", pattern=""):
     if ext:
         pattern = r"[\"(](http[s]?://[^\s]{0,150}." + "{})[\")]".format(ext)
 
