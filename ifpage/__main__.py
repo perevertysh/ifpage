@@ -12,6 +12,7 @@ def set_parser():
     parser.add_argument('--pattern', default="", type=str, help='r-string pattern to re.findall()')
     parser.add_argument('--ext', type=str, help='file extension')
     parser.add_argument('--dir_name', default="samples", type=str, help='target dir name')
+    parser.add_argument('--dir_path', type=str, help='path to target directory')
     return parser.parse_args()
 
 
@@ -28,7 +29,10 @@ def fetch_imgs(dir_name="", ext="", url="", pattern=""):
     counter = 0
     for link in links:
         print(link)
-        path = os.path.abspath("".join(os.path.dirname(__file__).split("/")[0:-2]))
+        if dir_path:
+            path = dir_path
+        else:
+            path = os.path.abspath("".join(os.path.dirname(__file__).split("/")[0:-2]))
         filename = "{}{}img{}.{}".format(path, "/" + dir_name + "/" if dir_name else "", counter, ext)
         os.system("touch {}".format(filename))
         with open(filename, 'wb') as file:
@@ -43,7 +47,8 @@ def main():
         fetch_imgs(url=args.url,
                    pattern=args.pattern if args.pattern else None,
                    ext=args.ext,
-                   dir_name=args.dir_name)
+                   dir_name=args.dir_name,
+                   dir_path=args.dir_path)
         print("params of fetch:")
         [print("{}={}".format(key, value)) for key, value in args.__dict__.items()]
     except requests.exceptions.MissingSchema as e:
